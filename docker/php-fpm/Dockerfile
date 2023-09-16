@@ -25,7 +25,6 @@ ARG PGID=1000
 RUN apk --no-cache add shadow && \
     groupmod -o -g ${PGID} www-data && \
     usermod -o -u ${PUID} -g www-data www-data
-
 # Source code
 RUN chown www-data:www-data /var/www
 COPY --chown=www-data:www-data ./ /var/www
@@ -36,6 +35,7 @@ USER www-data
 # Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-CMD php-fpm
+CMD composer install && \
+    php-fpm
 
 EXPOSE 9000
