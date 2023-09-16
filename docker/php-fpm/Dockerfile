@@ -36,6 +36,7 @@ USER www-data
 # Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-CMD php-fpm
+CMD composer install && \ 
+  php-fpm
 
 EXPOSE 9000
