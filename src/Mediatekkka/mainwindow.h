@@ -10,7 +10,11 @@
 #include <QNetworkReply>
 #include <QDebug>
 #include <QVBoxLayout>
+#include <QIcon> //
+#include <QListWidgetItem>
+
 #include "qlistviewexplorermodel.h"
+#include "filegetter.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -25,14 +29,16 @@ public:
     ~MainWindow();
 private slots:
     void on_listView_doubleClicked(const QModelIndex &index);
+    //
+    void onReply(QNetworkReply *reply);
 
 private:
     Ui::MainWindow *ui;
     QFileInfoList *aDirList;
-    QFileInfoList *aMainDirList;
     QListViewExplorerModel *model;
-    QListViewExplorerModel *mainModel;
-    QNetworkAccessManager *manager;
+//    QNetworkAccessManager *manager;
     QDir currentFolder;
+    //
+    fileGetter *file_getter;
 };
 #endif // MAINWINDOW_H

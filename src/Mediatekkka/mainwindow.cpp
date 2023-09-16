@@ -17,6 +17,23 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->ui->lineEditPath->setText(QDir::currentPath());
     //
+    this->ui->iconsListWidget->setViewMode(QListWidget::IconMode);
+    this->ui->iconsListWidget->setResizeMode(QListWidget::Adjust);
+
+    this->ui->iconsListWidget->setIconSize(QSize(150, 150));
+
+    QDir::setCurrent("");
+
+    file_getter = new fileGetter;
+
+    connect(file_getter->get_manager(), SIGNAL(finished(QNetworkReply *)), this, SLOT(onReply(QNetworkReply *)));
+
+
+    for (int i = 400; i <= 400 + 5; i++) {
+        QString source = "/" + QString::number(i);
+        file_getter->getMiniature(source);
+    }
+
     /*
     centralWidget()->setLayout(new QVBoxLayout());
 
@@ -29,6 +46,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete file_getter;
 }
 
 void MainWindow::on_listView_doubleClicked(const QModelIndex &index)
@@ -40,4 +58,11 @@ void MainWindow::on_listView_doubleClicked(const QModelIndex &index)
     } else {
         QDesktopServices::openUrl(QUrl(this->aDirList->at(index.row()).absoluteFilePath()));
     }
+}
+
+void MainWindow::onReply(QNetworkReply *reply) {
+    QPixmap img;
+    img.loadFromData(reply->readAll());
+    this->ui->iconsListWidget->addItem(new QListWidgetItem(QIcon(img), "name"));
+
 }
