@@ -28,5 +28,5 @@ security:
                 check_path: api_refresh_token
 
     access_control:
-        - { path: ^/api/v1/upload, roles: ROLE_ADMIN }
+        # - { path: ^/api/v1/upload, roles: ROLE_ADMIN }
         - { path: ^/api/v1/,       roles: PUBLIC_ACCESS }

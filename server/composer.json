@@ -12,6 +12,7 @@
         "doctrine/orm": "^2.16",
         "gesdinet/jwt-refresh-token-bundle": "^1.1",
         "jms/serializer-bundle": "^5.3",
+        "league/flysystem-bundle": "^3.2",
         "lexik/jwt-authentication-bundle": "^2.19",
         "nelmio/api-doc-bundle": "^4.12",
         "phpdocumentor/reflection-docblock": "^5.3",

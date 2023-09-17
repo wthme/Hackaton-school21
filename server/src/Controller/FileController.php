@@ -4,6 +4,8 @@ declare(strict_types=1);
  
 namespace App\Controller;
  
+use League\Flysystem\FilesystemException;
+use League\Flysystem\FilesystemOperator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -15,13 +17,33 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/api/v1', name: 'api_')]
 class FileController extends AbstractController
 {
-    #[Route('/file', name: 'file_get', methods:['get'] )]
-    public function fileAction(): BinaryFileResponse
+    #[Route('/content', name: 'content', methods:['get'] )]
+    public function contentAction(FilesystemOperator $defaultStorage): JsonResponse
     {
-        // load the file from the filesystem
-        $file = new File('./files/30f5145s-960.jpg');
+        try {
+            $listing = $defaultStorage->listContents('./', true);
+        
+            /** @var \League\Flysystem\StorageAttributes $item */
+            $content = [
+                'files' => [],
+                'events' => [],
+            ];
+            foreach ($listing as $item) {
+                $path = $item->path();
+        
+                if ($item instanceof \League\Flysystem\FileAttributes) {
+                    // handle the file
+                    $content['files'][] = $item->path();
+                } elseif ($item instanceof \League\Flysystem\DirectoryAttributes) {
+                    // handle the directory
+                    $content['events'][] = $item->path();
+                }
+            }
+        } catch (FilesystemException $exception) {
+            // handle the error
+        }
 
-        return $this->file($file);
+        return $this->json($content);
     }
 
     #[Route('/upload', name: 'file_upload', methods:['post'] )]
@@ -36,7 +58,7 @@ class FileController extends AbstractController
 
         try {
             foreach($request->files as $file) {
-                $file->move('./files', $file->getClientOriginalName());
+                $file->move('./uploaded', $file->getClientOriginalName());
             }
             return $this->json([
                 'status' => 'success',
