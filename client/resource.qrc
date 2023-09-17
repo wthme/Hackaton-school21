@@ -9,5 +9,6 @@
         <file>img/pic.png</file>
         <file>img/download_icon.png</file>
         <file>config</file>
+        <file>img/app.ico</file>
     </qresource>
 </RCC>

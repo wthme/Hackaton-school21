@@ -27,6 +27,14 @@ FORMS += \
     loginwindow.ui \
     mainwindow.ui
 
+unix: {
+    ICON = $${PWD}/img/app.ico
+}
+
+macx: {
+    ICON = $${PWD}/img/app.ico
+}
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
