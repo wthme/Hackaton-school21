@@ -37,6 +37,7 @@ USER www-data
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 CMD composer install && \ 
-  php-fpm
+  php-fpm && \
+  ./bin/console doctrine:migration:migrate
 
 EXPOSE 9000
