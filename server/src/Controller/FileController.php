@@ -46,6 +46,17 @@ class FileController extends AbstractController
         return $this->json($content);
     }
 
+    #[Route('/file', name: 'file_get', methods:['get'] )]
+    public function fileAction(Request $request, FilesystemOperator $defaultStorage): BinaryFileResponse
+    {
+        $data = json_decode($request->getContent(), true);
+        $path = current($data);
+        
+        $file = new File('./upload/'.$path);
+
+        return $this->file($file);
+    }
+
     #[Route('/upload', name: 'file_upload', methods:['post'] )]
     public function uploadAction(Request $request): JsonResponse
     {
