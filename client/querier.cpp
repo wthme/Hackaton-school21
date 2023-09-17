@@ -11,15 +11,14 @@ Querier::~Querier() {
     delete manager;
 }
 
-void Querier::getMiniature(QString source) {
-    //url must be API for getting one exact miniature
-    QUrl url = QUrl(host + source);
-    request.setUrl(url);
-    reply = manager->get(request);
-}
-
 QNetworkAccessManager* Querier::get_manager() {
     return manager;
+}
+
+void Querier::get_file_names() {
+    QUrl url = QUrl(host + "/api/v1/content");
+    request.setUrl(url);
+    manager->get(request);
 }
 
 void Querier::load_files(QStringList file_names) {
@@ -43,6 +42,18 @@ void Querier::load_files(QStringList file_names) {
         delete reply;
     }
 }
+
+void Querier::get_file(QString filename) {
+    QUrl url = QUrl(host + "/api/v1/file");
+    QJsonObject json_obj;
+    json_obj["path"] = filename;
+    QJsonDocument doc(json_obj);
+    QByteArray data = doc.toJson();
+
+    request.setUrl(url);
+    manager->post(request, data);
+}
+
 
 /*
     TODO:

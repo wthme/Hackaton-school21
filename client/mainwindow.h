@@ -13,6 +13,9 @@
 #include <QIcon>
 #include <QListWidgetItem>
 #include <QFileDialog>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
 #include "qlistviewexplorermodel.h"
 #include "querier.h"
@@ -35,6 +38,9 @@ private slots:
     void on_listView_doubleClicked(const QModelIndex &index);
     //
     void onReply(QNetworkReply *reply);
+    void first_get(QNetworkReply *reply);
+
+    void logInConf();
 
     void on_uploadButton_clicked();
 
@@ -44,6 +50,8 @@ private:
     Ui::MainWindow *ui;
     QFileInfoList *aDirList;
     QListViewExplorerModel *model;
+
+    QStringList event_names;
 //    QNetworkAccessManager *manager;
     QDir currentFolder;
     //

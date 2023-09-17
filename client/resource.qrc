@@ -9,6 +9,10 @@
         <file>img/pic.png</file>
         <file>img/download_icon.png</file>
         <file>config</file>
+<<<<<<< HEAD
         <file>img/app.ico</file>
+=======
+        <file>jwt</file>
+>>>>>>> 978804663c5dfbc454b0d4927aa0dff16a116963
     </qresource>
 </RCC>

@@ -30,7 +30,7 @@ private slots:
 
     void on_sign_up_button_clicked();
 
-    void on_to_log_in_clicked();
+    void on_to_log_in_clicked();    
 
 private:
     Ui::LogInWindow *ui;

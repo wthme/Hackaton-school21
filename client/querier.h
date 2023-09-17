@@ -8,6 +8,8 @@
 #include <QUrl>
 #include <QHttpMultiPart>
 #include <QVariant>
+#include <QJsonObject>
+#include <QJsonDocument>
 
 class Querier
 {
@@ -17,11 +19,13 @@ public:
 
     QNetworkReply* reply;
 
-    void getMiniature(QString source);
     QNetworkAccessManager* get_manager();
     void load_files(QStringList file_names);
+    void get_file_names();
+    void get_file(QString filename);
 
 private:
+
     QNetworkAccessManager *manager;
     QString host;
     QNetworkRequest request;
