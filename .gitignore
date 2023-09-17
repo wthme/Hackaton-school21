@@ -1,4 +1,10 @@
 /vendor/
 /var/
 /docker/data/
-/public/files/
+/public/files/*
+/public/bundles/
+/public/upload
+###> lexik/jwt-authentication-bundle ###
+/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###
+.idea

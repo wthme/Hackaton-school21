@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
  
 namespace App\Controller;
  
@@ -10,7 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
  
-#[Route('/api', name: 'api_')]
+#[Route('/api/v1', name: 'api_')]
 class FileController extends AbstractController
 {
     #[Route('/file', name: 'file_get', methods:['get'] )]
