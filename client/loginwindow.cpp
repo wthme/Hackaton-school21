@@ -19,6 +19,7 @@ LogInWindow::LogInWindow(QWidget *parent) :
     connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(onReply(QNetworkReply*)));
 }
 
+
 LogInWindow::~LogInWindow()
 {
     delete request;
@@ -26,14 +27,25 @@ LogInWindow::~LogInWindow()
     delete ui;        
 }
 
+
 void LogInWindow::onReply(QNetworkReply* reply) {
     qDebug() << reply->error();
-    if (reply->error() == QNetworkReply::NoError) {
-        qDebug() << reply->readAll();
-        //emit loginSuccess();
-    } else if (reply->error() == 401) {
-        ui->loginErrorLine->setText(QString("Login error: unknown user"));
+    if (ui->log_in_widg->isVisible()) {
+        if (reply->error() == QNetworkReply::NoError) {
+            emit loginSuccess();
+        } else if (reply->error() == 401) {
+            ui->loginErrorLine->setText("Incorrect login/password");
+        }
+    } else {
+        if (reply->error() == QNetworkReply::NoError) {
+            ui->sign_up_widg->hide();
+            ui->log_in_widg->show();
+            ui->loginErrorLine->setText("Signed in successfuly");
+        } else if (reply->error() == 401) {
+            ui->signUpErrorLine->setText("Internal Error");
+        }
     }
+
 }
 
 
