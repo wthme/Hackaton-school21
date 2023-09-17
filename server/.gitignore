@@ -1,6 +1,6 @@
 /vendor/
 /var/
-/docker/data/
+/docker/data/*
 /public/files/*
 /public/bundles/
 /public/upload
