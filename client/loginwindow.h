@@ -4,6 +4,8 @@
 #include <QDialog>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#include <QJsonObject>
+#include <QJsonDocument>
 
 namespace Ui {
 class LogInWindow;
@@ -22,7 +24,13 @@ signals:
 
 private slots:
     void on_sign_in_button_clicked();
-    void onLogInRequest(QNetworkReply* reply);
+    void onReply(QNetworkReply* reply);
+
+    void on_to_sign_up_clicked();
+
+    void on_sign_up_button_clicked();
+
+    void on_to_log_in_clicked();
 
 private:
     Ui::LogInWindow *ui;

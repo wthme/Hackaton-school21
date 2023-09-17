@@ -8,5 +8,6 @@
         <file>img/zip.png</file>
         <file>img/pic.png</file>
         <file>img/download_icon.png</file>
+        <file>config</file>
     </qresource>
 </RCC>

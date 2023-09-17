@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QFile>
+#include <QDir>
 
 QString get_host();
 
