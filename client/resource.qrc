@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>img/file.png</file>
+        <file>img/folder.png</file>
+        <file>img/folderup.png</file>
+        <file>img/iconlist.png</file>
+        <file>img/list.png</file>
+        <file>img/zip.png</file>
+        <file>img/pic.png</file>
+        <file>img/download_icon.png</file>
+        <file>config</file>
+    </qresource>
+</RCC>
